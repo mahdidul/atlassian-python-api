@@ -53,7 +53,7 @@ class PullRequests(BitbucketCloudBase):
 
         return self.__get_object(self.post(None, data))
 
-    def each(self, q=None, sort=None):
+    def each(self, q=None, sort=None, trailing=True):
         """
         Returns the list of pull requests in this repository.
 
@@ -71,7 +71,7 @@ class PullRequests(BitbucketCloudBase):
             params["sort"] = sort
         if q is not None:
             params["q"] = q
-        for pr in self._get_paged(None, trailing=True, params=params):
+        for pr in self._get_paged(None, trailing=trailing, params=params):
             yield self.__get_object(pr)
 
         return
